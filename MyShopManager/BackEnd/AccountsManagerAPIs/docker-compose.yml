@@ -1,0 +1,25 @@
+﻿version: "3.8"
+
+services:
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "1StrongPwd!!"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+  account-microservice:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    environment: 
+        DBServer: "sqlserver"
+        DBPort: "1433"
+        DBUser: "sa"
+        DBPassword: "1StrongPwd!!"
+        Database: "AccountsDb"
+    ports:
+        - 3400:80
+    depends_on: 
+        - sqlserver

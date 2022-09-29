@@ -1,0 +1,16 @@
+﻿version: "3.8"
+
+services: 
+  #  apigateway:
+  #      build:
+  #          context: .
+  #          dockerfile: Dockerfile
+  #      ports:
+  #          - 5111:80
+    apigateway:
+        image: ${DOCKER_REGISTRY-}apigateway
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "5111:80"    
